@@ -1,4 +1,6 @@
 from main import Author, Quote
+from connect import connect_to_db
+connect_to_db()
 
 while True:
     command = input("Enter your command: ")
@@ -7,18 +9,22 @@ while True:
         break
     else:
         keyword, value = command.split(":")
+    
         if keyword == "name":
-            quotes = Quote.objects(author__fullname=value)
-            # якщо список цитат не порожній
-            if quotes:
-                # виводимо кількість знайдених цитат
-                print(f"Found {len(quotes)} quotes by {value}:")
-                for quote in quotes:
-                    # виводимо текст цитати і теги, розділені комами
-                    print(f"\"{quote.quote}\" ({', '.join(quote.tags)})")
-            # якщо список цитат порожній
-            else:
-                print(f"No quotes found by {value}.")
+            author = Author.objects(fullname__icontains=value).first()
+            print(author)
+            if author:
+                quotes = Quote.objects(author=author)
+                # якщо список цитат не порожній
+                if quotes:
+                    # виводимо кількість знайдених цитат
+                    print(f"Found {len(quotes)} quotes by {value}:")
+                    for quote in quotes:
+                        # виводимо текст цитати і теги, розділені комами
+                        print(f"\"{quote.quote}\" ({', '.join(quote.tags)})")
+                # якщо список цитат порожній
+                else:
+                    print(f"No quotes found by {value}.")
         elif keyword == "tag":
             # знаходимо всі цитати, які мають такий тег, використовуючи метод objects
             quotes = Quote.objects(tags=value)

@@ -1,4 +1,4 @@
-from mongoengine import StringField, Document, ObjectIdField, ReferenceField, ListField
+from mongoengine import StringField, Document, ObjectIdField, ReferenceField, ListField, BooleanField
 import uuid
 
 class Author(Document):
@@ -16,3 +16,10 @@ class Quote(Document):
     quote = StringField(max_length=1050)
 
     author = ReferenceField(Author)
+
+
+class Contact(Document):
+    full_name = StringField(required=True)
+    email  = StringField(required=True)
+    notifed = BooleanField(default=False)
+

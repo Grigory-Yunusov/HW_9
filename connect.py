@@ -12,6 +12,6 @@ def connect_to_db():
 
     # Підключення до кластера на AtlasDB за допомогою рядка підключення
     connect(host=f"mongodb+srv://{mongo_user}:{mongodb_pass}@{domain}/{db_name}?retryWrites=true&w=majority", ssl=True)
-
+    # return connect
 # Виклик функції для підключення
 # connect_to_db()
