@@ -1,4 +1,4 @@
-from main import Author, Quote
+from models import Author, Quote
 from connect import connect_to_db
 
 

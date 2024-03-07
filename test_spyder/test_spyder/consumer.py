@@ -1,7 +1,7 @@
 import pika 
 import json
 from connect import connect_to_db
-from models import Contact
+from items import ContactItem
 
 connect_to_db()
 
@@ -15,7 +15,7 @@ chanel.queue_declare(queue=queue_name)
 def process_message(ch, method, properties, body):
     message = json.loads(body)
     contact_id = message["contact_id"]
-    contact = Contact.objects.get(id=contact_id)
+    contact = ContactItem.objects.get(id=contact_id)
 
     print(f"Sending email to {contact.email}...")
 

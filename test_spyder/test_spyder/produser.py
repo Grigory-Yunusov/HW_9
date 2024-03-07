@@ -1,7 +1,7 @@
 import pika
 import json
 from connect import connect_to_db
-from models import Contact
+from items import ContactItem
 
 
 connect_to_db()
@@ -19,7 +19,7 @@ fake_contacts = [
     ]
 
 for contact in fake_contacts:
-    contact_obj = Contact(full_name=contact["full_name"], email=contact["email"])    
+    contact_obj = ContactItem(full_name=contact["full_name"], email=contact["email"])    
     contact_obj.save()
 
     massage = {"contact_id": str(contact_obj.id)}

@@ -1,4 +1,4 @@
-from models import Author, Quote
+from items import AuthorItem, QuoteItem
 from connect import connect_to_db
 connect_to_db()
 
@@ -11,10 +11,10 @@ while True:
         keyword, value = command.split(":")
     
         if keyword == "name":
-            author = Author.objects(fullname__icontains=value).first()
+            author = AuthorItem.objects(fullname__icontains=value).first()
             print(author)
             if author:
-                quotes = Quote.objects(author=author)
+                quotes = QuoteItem.objects(author=author)
                 # якщо список цитат не порожній
                 if quotes:
                     # виводимо кількість знайдених цитат
@@ -27,7 +27,7 @@ while True:
                     print(f"No quotes found by {value}.")
         elif keyword == "tag":
             # знаходимо всі цитати, які мають такий тег, використовуючи метод objects
-            quotes = Quote.objects(tags=value)
+            quotes = QuoteItem.objects(tags=value)
             if quotes:
                 print(f"Found {len(quotes)} quotes with tag {value}:")
                 # для кожної цитати в списку
@@ -39,7 +39,7 @@ while True:
         elif keyword == "tags":
             tags = value.split(",")
             # знаходимо всі цитати, які мають хоча б один з цих тегів, використовуючи метод objects
-            quotes = Quote.objects(tags__in=tags)
+            quotes = QuoteItem.objects(tags__in=tags)
             if quotes:
                 print(f"Found {len(quotes)} quotes with tags {value}:")
                 for quote in quotes:
