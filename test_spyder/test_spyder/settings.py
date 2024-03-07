@@ -19,8 +19,13 @@ USER_AGENT = "test_spyder (+http://www.grigorycluster.fcnxhdr.mongodb.net)"
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
-   'test_spyder.pipelines.JsonWriterPipeline': 300,
+   'test_spyder.pipelines.MongoDBPipeline': 300,
+   'test_spyder.pipelines.JsonWriterPipeline': 200,
 }
+
+
+
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -94,5 +99,5 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
-# FEED_FORMAT = "jsonlines"
-# FEES_URI = "quotes.json"
+FEED_FORMAT = "jsonlines"
+FEES_URI = "quotes.json"

@@ -6,15 +6,10 @@
 import scrapy
 from connect import connect_to_db
 
+
 connect_to_db()
 
-class TestSpyderItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-
-
-class QuoteItem(scrapy.Item):
+class QuoteItem(scrapy.Item): 
     tags = scrapy.Field()
     author = scrapy.Field()
     quote = scrapy.Field()

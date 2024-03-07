@@ -14,7 +14,8 @@
 
 import json
 from connect import connect_to_db
-
+from bson import ObjectId
+from .models import Author, Quote
 connect_to_db()
 
 class JsonWriterPipeline(object):
@@ -35,4 +36,14 @@ class JsonWriterPipeline(object):
             self.authors_data.append(dict(item))
         else:
             self.quotes_data.append(dict(item))
+        return item
+
+class MongoDBPipeline:
+    def process_item(self, item, spider):
+        if 'fullname' in item:
+            author = Author(**item)
+            author.save()
+        else:
+            quote = Quote(**item)
+            quote.save()
         return item
